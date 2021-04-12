@@ -10,7 +10,7 @@ public class MyDobleIterator implements Iterator<Integer> {
 
     public MyDobleIterator(final NodoDoble first) {
         this.cursorHead = first;
-        this.cursorTail = first.getPrevious();
+        if (Objects.nonNull(first)) this.cursorTail = first.getPrevious();
     }
 
     @Override
@@ -43,6 +43,9 @@ public class MyDobleIterator implements Iterator<Integer> {
 
     public void move() {
         this.cursorHead = this.cursorHead.getNext();
+    }
+    public boolean isLast() {
+        return this.cursorHead == this.cursorTail;
     }
 
 }

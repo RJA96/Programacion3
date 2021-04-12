@@ -12,9 +12,7 @@ public class Service {
         integerList.forEach(doublyLinkedList::addNode);
         MyDobleIterator dobleIterator = doublyLinkedList.iterator();
         System.out.println(doublyLinkedList);
-        doublyLinkedList.extractFront();
-        System.out.println(doublyLinkedList);
-        System.out.println(resolveSequence(dobleIterator, 10));
+        System.out.println(resolveSequence(dobleIterator, umbral));
     }
 
     private DoublyLinkedList resolveSequence(MyDobleIterator iterator, final Integer umbral) {
@@ -30,6 +28,7 @@ public class Service {
                     }
                     iterator.next();
                 }
+                if (iterator.isLast() && suma + iterator.get() <= umbral) suma +=iterator.get();
                 if (!suma.equals(0)) salida.addNode(suma);
             }
             if (iterator.hasNext()) {

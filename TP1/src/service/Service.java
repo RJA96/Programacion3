@@ -16,7 +16,7 @@ public class Service {
         System.out.println("salida: " + resolveSequence(dobleIterator, umbral));
     }
 
-    //O(N*N) N = tamaño maximo de lista
+    //O(log N) N = tamaño maximo de lista
     private DoublyLinkedList resolveSequence(MyDobleIterator iterator, final Integer umbral) {
         DoublyLinkedList salida = new DoublyLinkedList();
         Integer suma = 0;

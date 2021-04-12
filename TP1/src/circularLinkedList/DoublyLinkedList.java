@@ -1,4 +1,4 @@
-package dobleLinkedListCircular;
+package circularLinkedList;
 
 import java.util.Objects;
 
@@ -7,25 +7,23 @@ public class DoublyLinkedList implements Iterable<Integer> {
     private NodoDoble head, tail;
     private Integer size = 0;
 
+    //O(1)
     public void addNode(Integer info) {
-        //if list is empty, head and tail points to newNode
         if (Objects.isNull(head)) {
             NodoDoble newNode = new NodoDoble(info, null, null);
             head = tail = newNode;
         } else {
             NodoDoble newNode = new NodoDoble(info);
             tail.setNext(newNode);
-            //newNode->previous set to tail
             newNode.setPrevious(tail);
-            //newNode becomes new tail
             tail = newNode;
-            //tail's next point to null
             tail.setNext(head);
             head.setPrevious(tail);
         }
         size++;
     }
 
+    //O(1)
     public Integer extractFront() {
         if (Objects.nonNull(head)) {
             Integer integer = head.getInfo();
@@ -47,6 +45,7 @@ public class DoublyLinkedList implements Iterable<Integer> {
         return size;
     }
 
+    //O(n) N=index, codicion que index>size
     public Integer get(Integer index) {
         if (index < size) {
             if (index.equals(0)) {
@@ -66,12 +65,10 @@ public class DoublyLinkedList implements Iterable<Integer> {
     @Override
     public String toString() {
         StringBuilder toString = new StringBuilder();
-        //Node current will point to head
         toString.append("[");
         NodoDoble current = head;
         Integer aux = size;
         while (aux != 0) {
-            //Print each node and then go to next.
             toString.append(current.getInfo());
             current = current.getNext();
             aux--;
@@ -83,6 +80,7 @@ public class DoublyLinkedList implements Iterable<Integer> {
         return toString.toString();
     }
 
+    //O(1)
     @Override
     public MyDobleIterator iterator() {
         return new MyDobleIterator(head);

@@ -1,4 +1,4 @@
-package dobleLinkedListCircular;
+package circularLinkedList;
 
 import java.util.Iterator;
 import java.util.Objects;
@@ -35,15 +35,19 @@ public class MyDobleIterator implements Iterator<Integer> {
         return this.cursorHead.getInfo();
     }
 
+    //O(1)
     public Integer getNext() {
-        if (Objects.nonNull(cursorHead.getNext()))
+        if (Boolean.TRUE.equals(cursorTail.hasNext()))
             return this.cursorHead.getNext().getInfo();
         else return 0;
     }
 
+    //O(1)
     public void move() {
         this.cursorHead = this.cursorHead.getNext();
     }
+
+    //O(1)
     public boolean isLast() {
         return this.cursorHead == this.cursorTail;
     }

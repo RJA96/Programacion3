@@ -8,7 +8,25 @@ public class DoublyLinkedList implements Iterable<Integer> {
     private Integer size = 0;
 
     //O(1)
-    public void addNode(Integer info) {
+    public void insertFront(Integer info) {
+        if (Objects.isNull(head)) {
+            NodoDoble newNode = new NodoDoble(info, null, null);
+            head = tail = newNode;
+        } else {
+            NodoDoble newNode = new NodoDoble(info);
+            NodoDoble temp = head;
+            head.setPrevious(newNode);
+            newNode.setNext(head);
+            newNode.setPrevious(tail);
+            head = newNode;
+            tail.setPrevious(temp);
+            tail.setNext(head);
+        }
+        size++;
+    }
+
+    //O(1)
+    public void insertBack(Integer info) {
         if (Objects.isNull(head)) {
             NodoDoble newNode = new NodoDoble(info, null, null);
             head = tail = newNode;
@@ -24,11 +42,23 @@ public class DoublyLinkedList implements Iterable<Integer> {
     }
 
     //O(1)
-    public Integer extractFront() {
+    public Integer extractBack() {
         if (Objects.nonNull(head)) {
             Integer integer = head.getInfo();
             tail.setNext(head.getNext());
             head = head.getNext();
+            head.setPrevious(tail);
+            size--;
+            return integer;
+        } else return null;
+    }
+
+    //O(1)
+    public Integer extractFront() {
+        if (Objects.nonNull(tail)) {
+            Integer integer = tail.getInfo();
+            tail = tail.getPrevious();
+            tail.setNext(head);
             head.setPrevious(tail);
             size--;
             return integer;

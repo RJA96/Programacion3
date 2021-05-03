@@ -1,25 +1,14 @@
 package tree;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
 
   public static void main(String[] args) {
-    List<Integer> list = new ArrayList<>() {
-      {
-        add(15);
-        add(4);
-        add(1);
-        add(25);
-        add(50);
-        add(6);
-        add(7);
-        add(20);
-        add(5);
-        add(30);
-      }
-    };
+    List<Integer> list = new ArrayList<>(Arrays.asList(15, 4, 1, 25, 50, 6, 7, 20, 5, 30));
+
     Tree treeNode = new Tree(list);
 
     treeNode.printPreOrder();
@@ -63,11 +52,19 @@ public class Main {
     System.out.println("añado 55");
     treeNode.add(55);
     treeNode.printPreOrder();
+
     System.out.println("elemento Maximo: "+ treeNode.getMaxElem());
     System.out.println("Altura: "+treeNode.getHeight());
     System.out.println("Rama mas larga: "+treeNode.getLongestBranch());
     System.out.println("Elementos al nivel 2: " +treeNode.getElementAtLevel(2));
     System.out.println("Frontera: " + treeNode.getFrontera());
+
+    System.out.println("Print Pre Order");
+    treeNode.printPreOrder();
+    System.out.println("PrintInOrder");
+    treeNode.printInOrder();
+    System.out.println("Print Post Order");
+    treeNode.printPosOrder();
   }
 
 }

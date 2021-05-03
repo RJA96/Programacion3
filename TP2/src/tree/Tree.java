@@ -340,14 +340,30 @@ public class Tree {
     }
   }
 
-
+  /*
+        Complejidad O(N) siendo N la altura del árbol
+        recorre el arbol buscando el ultimo nodo de cada rama
+   */
   public List getFrontera() {
-    List<Integer> frontera = new ArrayList<>();
-    return null;
+    return getFrontera(this);
   }
 
-  public List getFrontera(Tree tree) {
+  /*
+        Complejidad O(N) siendo N la altura del árbol
+        recorre el arbol buscando el ultimo nodo de cada rama
+   */
+  private List getFrontera(Tree tree) {
     List<Integer> frontera = new ArrayList<>();
+    if (Objects.isNull(tree.getRight()) && Objects.isNull(tree.getLeft())) {
+      frontera.add(tree.getValor());
+    } else if (Objects.nonNull(tree.getLeft()) && Objects.isNull(tree.getRight())) {
+      frontera.addAll(getFrontera(tree.getLeft()));
+    } else if (Objects.isNull(tree.getLeft())) {
+      frontera.addAll(getFrontera(tree.getRight()));
+    } else {
+      frontera.addAll(getFrontera(tree.getLeft()));
+      frontera.addAll(getFrontera(tree.getRight()));
+    }
     return frontera;
   }
 

@@ -23,7 +23,7 @@ public class Tree {
   }
 
   /*
-    Complejidad O(n) siendo N el tamaño de la lista
+    Complejidad O(n^2) siendo N el tamaño de la lista
     Siempre recorrera todos los elementos, ya que por cada uno llama al metodo add()
   */
   public Tree(List<Integer> list) {
@@ -107,24 +107,26 @@ public class Tree {
       Complejidad O(n) siendo n la altura del arbol
       en el peor de los casos recorrera todas las ramas en busqueda del elemento
   */
-  public boolean hasElem(Integer element) {
-    if (element.equals(valor)) {
-      return true;
-    } else if (element < valor) {
-      if (Objects.nonNull(izquierda)) {
-        izquierda.hasElem(element);
-      } else {
-        return false;
-      }
+  public boolean hasElement(Integer value) {
+    return Objects.nonNull(hasElement(value, this));
+  }
 
-    } else {
-      if (Objects.nonNull(derecha)) {
-        derecha.hasElem(element);
+  private Tree hasElement(Integer value, Tree tree) {
+    if(value > tree.getValor()) {
+      if(Objects.isNull(tree.getRight())) {
+        return null;
       } else {
-        return false;
+        return hasElement(value, tree.getRight());
       }
+    } else if(value < tree.getValor()) {
+      if(Objects.isNull(tree.getLeft())) {
+        return null;
+      } else {
+        return hasElement(value, tree.getLeft());
+      }
+    } else {
+      return tree;
     }
-    return false;
   }
 
   /*
@@ -144,6 +146,7 @@ public class Tree {
       en el peor de los casos el elemento se encontrara al final del arbol
   */
   public void delete(Integer element) {
+    if (Objects.nonNull(this.valor))
     delete(this, element);
   }
 
@@ -168,7 +171,7 @@ public class Tree {
           tree.getLeft().setValue(minNodeTreeOfRight);
         }
       } else {
-        tree.getLeft().delete(tree.getLeft(), integer);
+        tree.delete(tree.getLeft(), integer);
       }
     } else if (Objects.nonNull(tree.getRight()) && integer > tree.getValor()) {
       if (tree.getRight().getValor().equals(integer)) {
@@ -178,7 +181,7 @@ public class Tree {
         } else if (Objects.nonNull(tree.getRight().getLeft()) && Objects
             .isNull(tree.getRight().getRight())) {
           tree.setRight(tree.getRight().getLeft());
-        } else if (Objects.isNull(tree.getRight().getLeft())) {
+        } else if (Objects.isNull(tree.getRight().getRight())) {
           tree.setLeft(tree.getLeft().getRight());
         } else {
           Integer minNodeTreeOfRight = getMinimumElementInTree(tree.getRight().getRight());
@@ -186,14 +189,40 @@ public class Tree {
           tree.getRight().setValue(minNodeTreeOfRight);
         }
       } else {
-        tree.getLeft().delete(tree.getRight(), integer);
+        tree.delete(tree.getRight(), integer);
       }
     }
     if (tree.getValor().equals(integer)) {
-      if (Objects.nonNull(tree.getLeft()) && Objects.nonNull(tree.getRight())) {
-        Integer minNodeTreeOfRight = getMinimumElementInTree(tree.getRight());
-        delete(tree, minNodeTreeOfRight);
-        tree.setValue(minNodeTreeOfRight);
+      if(Objects.isNull(tree.getLeft()) && Objects.isNull(tree.getRight())) {
+        tree.setValue(null);
+      } else if(Objects.isNull(tree.getLeft()) && Objects.nonNull(tree.getRight())) {
+        Integer intTemp = tree.getRight().getValor();
+        delete(tree, tree.getRight().getValor());
+        tree.setValue(intTemp);
+
+      } else if(Objects.isNull(tree.getRight()) && Objects.nonNull(tree.getLeft())) { // Si tiene nodo izquierdo pero no derecho
+        Integer intTemp = tree.getLeft().getValor();
+        delete(tree, tree.getLeft().getValor());
+        tree.setValue(intTemp);
+
+      } else {
+        Tree currentNode = tree.getRight();
+        while(Objects.nonNull(currentNode.getLeft()) && Objects.nonNull(currentNode.getLeft().getLeft())) {
+          currentNode = currentNode.getLeft();
+        }
+        Tree aux = currentNode;
+        if(Objects.nonNull(currentNode.getLeft())) {
+          aux = currentNode.getLeft();
+        }
+        if(Objects.nonNull(aux.getRight())) {
+          currentNode.setLeft(aux.getRight());
+        } else {
+          currentNode.setLeft(null);
+        }
+        aux.setLeft(tree.getLeft());
+        aux.setRight(tree.getRight());
+        tree.setValue(aux.getValor());
+
       }
     }
 
@@ -203,11 +232,23 @@ public class Tree {
         Complejidad O(N) siendo N la altura del árbol
         busca el minimo elemento para un arbol dado recorriendo toda la altura
    */
-  public Integer getMinimumElementInTree(Tree tree) {
+  public Integer getMinimumElementInTree() {
+    if (Objects.nonNull(this.valor)) {
+      if (Objects.nonNull(this.getLeft())) {
+        return getMinimumElementInTree(this.getLeft());
+      }
+      return this.getValor();
+    } else return null;
+  }
+
+  /*
+        Complejidad O(N) siendo N la altura del árbol
+        busca el minimo elemento para un arbol dado recorriendo toda la altura
+   */
+  private Integer getMinimumElementInTree(Tree tree) {
     if (Objects.nonNull(tree.getLeft())) {
       return tree.getMinimumElementInTree(tree.getLeft());
     }
-
     return tree.getValor();
   }
 
@@ -216,20 +257,28 @@ public class Tree {
         recorre el arbol buscando la rama com mas altura.
    */
   public int getHeight() {
+    if(Objects.isNull(this.valor)) return 0;
     return getHeight(this);
   }
 
   private int getHeight(Tree tree) {
-    if (tree == null) {
+    if (Objects.isNull(tree.getLeft())&&Objects.isNull(tree.getRight())) {
       return 0;
-    } else {
-      return (1 + Math.max(getHeight(tree.getLeft()), getHeight(tree.getRight())));
     }
+    int leftHeight = 0;
+    int rightHeight = 0;
+    if(Objects.nonNull(tree.getRight())) {
+      rightHeight = getHeight(tree.getRight());
+    }
+    if(Objects.nonNull(tree.getLeft())) {
+      leftHeight = getHeight(tree.getLeft());
+    }
+    return Math.max(leftHeight, rightHeight) + 1;
 
   }
 
   /*
-        Complejidad O(N) siendo N la altura del árbol
+        Complejidad O(N) siendo N los elementos del arbol
         recorre el arbol imprimiendo cada uno de sus elementos
    */
   public void printPosOrder() {
@@ -238,7 +287,7 @@ public class Tree {
   }
 
   /*
-        Complejidad O(N) siendo N la altura del árbol
+        Complejidad O(N) siendo N los elementos del arbol
         recorre el arbol imprimiendo cada uno de sus elementos
    */
   private void printPosOrder(Tree tree) {
@@ -251,7 +300,7 @@ public class Tree {
   }
 
   /*
-        Complejidad O(N) siendo N la altura del árbol
+        Complejidad O(N) siendo N los elementos del arbol
         recorre el arbol imprimiendo cada uno de sus elementos
    */
   public void printInOrder() {
@@ -341,7 +390,7 @@ public class Tree {
   }
 
   /*
-        Complejidad O(N) siendo N la altura del árbol
+        Complejidad O(N) siendo N los elementos del arbol
         recorre el arbol buscando el ultimo nodo de cada rama
    */
   public List getFrontera() {
@@ -368,7 +417,7 @@ public class Tree {
   }
 
   /*
-        Complejidad O(N) siendo N el valor pasado como parametro
+        Complejidad O(N) siendo N los elementos del arbol
         recorre el arbol obteniendo todos los elementos en un nivel
    */
   public List<Integer> getElementAtLevel(Integer integer) {
@@ -420,6 +469,10 @@ public class Tree {
     }
   }
 
+  //O(1) ya que solo busca el valor
+  public int getRoot() {
+    return this.getValor();
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -438,4 +491,6 @@ public class Tree {
   public int hashCode() {
     return Objects.hash(getValor(), izquierda, derecha);
   }
+
+
 }

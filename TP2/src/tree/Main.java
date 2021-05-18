@@ -16,7 +16,6 @@ public class Main {
     System.out.println("Altura: " + treeNode.getHeight());
     System.out.println("Rama mas larga: " + treeNode.getLongestBranch());
     System.out.println("Elementos al nivel 3: " + treeNode.getElementAtLevel(3));
-    //TODO falta frontera
     System.out.println("Frontera: " + treeNode.getFrontera());
     System.out.println();
 
@@ -65,6 +64,53 @@ public class Main {
     treeNode.printInOrder();
     System.out.println("Print Post Order");
     treeNode.printPosOrder();
+
+    //Casos de delete presentados en la correcion
+    System.out.println();
+    System.out.println("CASOS DE PRUEBA EN EL DELATE");
+    System.out.println("Arbol Vacio");
+    Tree treeVacio = new Tree(new ArrayList<>());
+    treeVacio.printPreOrder();
+    System.out.println("intenta eliminar un valor");
+    treeVacio.delete(10);
+    treeVacio.printPreOrder();
+
+    System.out.println("Arbol solo raiz");
+    List<Integer> pruebaEliminarRaiz = new ArrayList<>(Arrays.asList(10));
+    Tree treeRaizEliminar = new Tree(pruebaEliminarRaiz);
+    treeRaizEliminar.printPreOrder();
+    treeRaizEliminar.delete(10);
+    treeRaizEliminar.printPreOrder();
+
+    System.out.println("Arbol con 2 elementos (funciona borrando tanto raiz como segundo elemento)");
+    List<Integer> pruebaEliminar2Elementos = new ArrayList<>(Arrays.asList(10,2));
+    Tree treeEliminar2Elementos = new Tree(pruebaEliminar2Elementos);
+    treeEliminar2Elementos.printPreOrder();
+    treeEliminar2Elementos.delete(10);
+    treeEliminar2Elementos.printPreOrder();
+
+    System.out.println("Arbol con 3 elementos");
+    List<Integer> pruebaEliminar3Elementos = new ArrayList<>(Arrays.asList(10,2,5));
+    Tree treeEliminar3Elementos = new Tree(pruebaEliminar3Elementos);
+    treeEliminar3Elementos.printPreOrder();
+    treeEliminar3Elementos.delete(10);
+    treeEliminar3Elementos.printPreOrder();
+
+    System.out.println("Arbol con 3 elementos caso 2");
+    List<Integer> pruebaEliminar3ElementosB = new ArrayList<>(Arrays.asList(10,11,12));
+    Tree treeEliminar3ElementosB = new Tree(pruebaEliminar3ElementosB);
+    treeEliminar3ElementosB.printPreOrder();
+    treeEliminar3ElementosB.delete(10);
+    treeEliminar3ElementosB.printPreOrder();
+
+    System.out.println("Arbol con 5 elementos");
+    List<Integer> pruebaEliminar5Elementos = new ArrayList<>(Arrays.asList(2,6,9,10,12));
+    Tree treeEliminar5Elementos = new Tree(pruebaEliminar5Elementos);
+    treeEliminar5Elementos.printPreOrder();
+    treeEliminar5Elementos.delete(10);
+    treeEliminar5Elementos.printPreOrder();
+    System.out.println("Tiene el elemento 12: " + treeEliminar5Elementos.hasElement(12));
+    System.out.println("Tiene el elemento 10: " + treeEliminar5Elementos.hasElement(10));
   }
 
 }

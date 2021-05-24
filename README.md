@@ -32,7 +32,7 @@ circular, en la cual los Nodos tenían siguiente y anterior.
 
 Se realizo un Service en el cual se encuentra la logica para resolver el problema.
 
-Para correr los casos de test planteados en el problema ejecutar el main y saran imprimidos por pantalla.
+Para correr los casos de test planteados en el problema ejecutar el main y saran impresos por pantalla.
 
 ![alt text](TP1/test.png)
 
@@ -97,6 +97,55 @@ System.out.println( miArbol.getFrontera() );
 ### Implementacion:
 La implementacion para este problema fue realizada con un arbol de busqueda binario. En los cuales los "nodos" eran Arboles.
 Para la resolucion de cada metodo se ralizo de forma recursiva.
-Para correr los casos de test planteados en el problema ejecutar el main y saran imprimidos por pantalla.
+Para correr los casos de test planteados en el problema ejecutar el main y saran impresos por pantalla.
 
 ![alt text](TP2/casosPrueba.png)
+
+## TP 3:
+Utilizando su propia implementación de Grafo desarrollado en este práctico, resuelva el siguiente problema:
+
+Una empresa de transporte desea encontrar el camino más corto por la cual los camiones tienen que viajar de una ciudad a otra. Para esto, la empresa cuenta con un mapa con información de las ciudades y las rutas/caminos que conectan las distintas ciudades.
+
+Para cada ciudad la empresa tiene registrada:
+
+-La cantidad de estaciones de servicio que hay en la ciudad
+
+-Si la ciudad posee balanza para realizar pesaje de camiones
+
+-Si existen radares de velocidad en las cercanías de la ciudad
+
+-La cantidad de talleres mecánicos en la ciudad
+
+Por cada ruta la empresa tiene registrado:
+
+-El par de ciudades que conecta
+
+-La cantidad de kilómetros de la ruta
+
+Se debe utilizar el grafo implementado para representar la red de conexiones entre las distintas ciudades del mapa. A continuación se muestra un ejemplo:
+![alt text](TP3/Grafo_Ejemplo.png)
+A partir de esta información, la empresa desea que le brindemos el camino más corto entre un par de ciudades dado. La distancia de un camino se calcula según la cantidad de kilómetros recorridos. Por ejemplo, para ir desde Azul a Ayacucho, la ruta más corta es: [Azul, Bolivar, Olavarría, Tandil, Ayacucho] con un total de 440 km de distancia a recorrer.
+
+Sin embargo, la empresa nos hace saber que los controles de pesaje conllevan mucho tiempo, e introducen mucha demora en los viajes, por lo que se desea que el viaje planificado atraviese, como máximo, por una única ciudad con balanza para pesaje. En este punto, dado que Olavarría y Tandil cuentan ambas con balanza de pesaje, nos indican que el camino [Azul, Bolivar, Olavarría, Tandil, Ayacucho] no es aceptable.
+
+Se debe proveer un servicio que, a partir de dos ciudades de origen y destino, calcule el camino más corto que atraviese como máximo una única ciudad con balanza de pesaje. La salida del servicio debe incluir la lista de ciudades en el orden que se las debe recorrer, junto con la cantidad total de kilómetros por recorrer.
+
+Se debe proveer un main en el que se instancien las rutas y las ciudades indicadas en este ejemplo, y que solicite e imprima el resultado de ejecutar el servicio solicitado con las siguientes ciudades, considerando las operaciones entre los distintos llamados:
+```
+origen: Azul - destino: Ayacucho
+origen: Rauch - destino: Mar del plata
+origen: Mar del plata - destino: Pehuajo
+eliminar la ciudad Ayacucho.
+eliminar la ruta Tandil - Rauch
+origen: Mar del plata - destino Pehuajo
+```
+### Implementacion:
+La implementacion para este problema fue realizada con un Grafo genérico no dirigido y vertices con etiquetas.
+
+Los vertices seran las ciudades y los Arcos las rutas siendo las etiquetas de los mismos los kilómetros.
+
+Para la resolución de este problema se utiliza el algoritmo de busqueda DFS (Depth First Search o Busqueda en Profundidad), implementado en la clase llamada "DFS".
+Luego se provee un Mapa en el cual esta contenido el Grafo y un Hashmap que contiene todas las ciudades.
+
+Para ejecutar los casos de pruebas planteados en el problema ejecutar la clase Main y estos seran impresos por pantalla.
+![alt text](TP3/casosDePrueba.png)

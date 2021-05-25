@@ -24,7 +24,7 @@ public class Mapa {
     }
 
     /**
-     * O()
+     * O(N) Siendo N = cantidadDeVertices
      */
     public void addCiudad(Ciudad ciudad) {
         this.ciudades.put(ciudad.getId(), ciudad);
@@ -32,7 +32,7 @@ public class Mapa {
     }
 
     /**
-     * O()
+     * O((N * 2) * M), Siendo N = cantidadDeVertices y M = cantidadDeArcos.
      */
     public void borrarCiudad(Ciudad ciudad) {
         this.grafo.borrarVertice(ciudad.getId());
@@ -40,21 +40,21 @@ public class Mapa {
     }
 
     /**
-     * O()
+     * Complejidad: O((N + M)*2), Siendo N = cantidadDeVertices y M = cantidadDeArcosDelVertice.
      */
     public void addRuta(Ciudad origen, Ciudad destino, int kilometros) {
         this.grafo.agregarArco(origen.getId(), destino.getId(), kilometros);
     }
 
     /**
-     * O()
+     * Complejidad: O((N + M)*2), Siendo N = cantidadDeVertices y M = cantidadDeArcos
      */
     public void borrarRuta(Ciudad origen, Ciudad destino) {
         this.grafo.borrarArco(origen.getId(), destino.getId());
     }
 
     /**
-     * O()
+     * O(N+M) Siendo N = Vertices y M = Arcos
      */
     public List<String> encontrarCamino(Ciudad origen, Ciudad destino, Integer cantidadBalanzas) {
         DFS dfs = new DFS(grafo, origen.getId(), destino.getId(), this, cantidadBalanzas);

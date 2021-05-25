@@ -3,7 +3,7 @@ package grafo;
 public class GrafoNoDirigido<T, V> extends GrafoDirigido<T, V> {
 
     /**
-     * Complejidad: O(N + O(2) + M)*2, Siendo N = cantidadDeVertices y M = cantidadDeArcosDelVertice. multiplicado por 2
+     * Complejidad: O((N + M)*2), Siendo N = cantidadDeVertices y M = cantidadDeArcosDelVertice. multiplicado por 2
      * porque llama a agregar arco dos veces.
      */
     @Override
@@ -13,7 +13,7 @@ public class GrafoNoDirigido<T, V> extends GrafoDirigido<T, V> {
     }
 
     /**
-     * Complejidad: O(N + M)*2, Siendo N = cantidadDeVertices y M = cantidadDeArcos multiplicado por 2 porque llama a
+     * Complejidad: O((N + M)*2), Siendo N = cantidadDeVertices y M = cantidadDeArcos multiplicado por 2 porque llama a
      * borrar arco 2 veces.
      */
     @Override

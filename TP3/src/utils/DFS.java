@@ -3,6 +3,7 @@ package utils;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Objects;
 
 import grafo.Grafo;
 
@@ -39,17 +40,24 @@ public class DFS {
             Integer verticeId = it.next();
             colores.put(verticeId, "blanco");
         }
-        ArrayList<ArrayList<Integer>> caminoFinal = dfs_visit(this.origen, kmRecorridos, 0);
-        if (!caminoFinal.isEmpty()) {
-            map.put(caminoFinal.get(caminoFinal.size() - 1), kmRecorridos);
+        ArrayList<Integer> caminoCorrecto = caminoCorrecto(this.origen, kmRecorridos);
+        if (Objects.nonNull(caminoCorrecto)) {
+            map.put(caminoCorrecto, kmRecorridos);
         }
         return map;
+    }
+
+    private ArrayList<Integer> caminoCorrecto(Integer vertice, Integer kilometros) {
+        ArrayList<ArrayList<Integer>> caminoFinal = getCaminos(vertice, kilometros, 0);
+        if (!caminoFinal.isEmpty()) {
+            return caminoFinal.get(caminoFinal.size() - 1);
+        } else return null;
     }
 
     /**
      * O(N+M) Siendo N = Vertices y M = Arcos
      */
-    private ArrayList<ArrayList<Integer>> dfs_visit(Integer vertice, Integer kilometros, Integer balanza) {
+    private ArrayList<ArrayList<Integer>> getCaminos(Integer vertice, Integer kilometros, Integer balanza) {
         ArrayList<ArrayList<Integer>> resultado = new ArrayList<>();
         colores.put(vertice, "amarillo");
         if ((vertice.equals(this.destino))
@@ -69,7 +77,7 @@ public class DFS {
                     if (haveBalanza(vertice)&&!vertice.equals(origen)) {
                         balanza++;
                     }
-                    ArrayList<ArrayList<Integer>> caminosParciales = dfs_visit(adyacente, kilometros, balanza);
+                    ArrayList<ArrayList<Integer>> caminosParciales = getCaminos(adyacente, kilometros, balanza);
                     kilometros -= getEtiquetaArco(vertice, adyacente);
                     if (haveBalanza(vertice)) {
                         balanza--;
@@ -87,14 +95,14 @@ public class DFS {
         }
         colores.put(vertice, "blanco");
         return resultado;
-
     }
+
 
     /**
      * Complejidad: O(N + M) Siendo N = cantidadDeVertices y M = cantidadDeArcos.
      */
     private Integer getEtiquetaArco(Integer verticeId, Integer verticeId2) {
-        return (Integer) this.grafo.obtenerArco(verticeId, verticeId2).getEtiqueta();
+        return (Integer) this.grafo.obtenerArco(verticeId, verticeId2);
     }
 
     /**

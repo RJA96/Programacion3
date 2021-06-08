@@ -24,9 +24,9 @@ public interface Grafo<T, V> {
     boolean existeArco(int verticeId1, int verticeId2);
 
     // Obtener el arco que conecta el verticeId1 con el verticeId2
-    Arco<T> obtenerArco(int verticeId1, int verticeId2);
+    T obtenerArco(int verticeId1, int verticeId2);
 
-    Vertice<T, V> obtenerVertice(int verticeId);
+    T obtenerVertice(int verticeId);
 
     // Devuelve la cantidad total de vertices en el grafo
     int cantidadVertices();

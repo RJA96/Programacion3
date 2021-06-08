@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 public class GrafoDirigido<T, V> implements Grafo<T, V> {
 
     protected List<Vertice<T, V>> vertices;
+    protected Integer cantidadArcos = 0;
 
     public GrafoDirigido() {
         this.vertices = new LinkedList<>();
@@ -54,6 +55,7 @@ public class GrafoDirigido<T, V> implements Grafo<T, V> {
                     .get();
             if (!existeArco(verticeId1, verticeId2)) {
                 vertice.addArco(verticeId2, etiqueta); // Agregamos el arco
+                cantidadArcos++;
             }
         }
 
@@ -77,6 +79,7 @@ public class GrafoDirigido<T, V> implements Grafo<T, V> {
         Vertice<T, V> vertice = findVertice(verticeId1);
         if (Objects.nonNull(vertice)) {
             vertice.removeArco(verticeId2);
+            cantidadArcos--;
         }
     }
 
@@ -104,18 +107,18 @@ public class GrafoDirigido<T, V> implements Grafo<T, V> {
      * Complejidad: O(N + M) Siendo N = cantidadDeVertices y M = cantidadDeArcos.
      */
     @Override
-    public Arco<T> obtenerArco(int verticeId1, int verticeId2) {
+    public T obtenerArco(int verticeId1, int verticeId2) {
         Vertice<T, V> vertice = findVertice(verticeId1);
-        return Objects.nonNull(vertice) ? vertice.getArco(verticeId2) : null;
+        return Objects.nonNull(vertice) ? (T) vertice.getArco(verticeId2).getEtiqueta() : null;
     }
 
     /**
      * Complejidad: O(N), Siendo N = cantidadDeVertices
      */
     @Override
-    public Vertice<T, V> obtenerVertice(int verticeId) {
+    public T obtenerVertice(int verticeId) {
         Vertice<T, V> vertice = findVertice(verticeId);
-        return Objects.nonNull(vertice) ? vertice : null;
+        return Objects.nonNull(vertice) ? vertice.getValue() : null;
     }
 
     /**
@@ -127,14 +130,11 @@ public class GrafoDirigido<T, V> implements Grafo<T, V> {
     }
 
     /**
-     * Complejidad: O(N + M), Siendo N = cantidadDeVertices y M = cantidadDeVertices
+     * Complejidad: O(1), Accede a la variable
      */
     @Override
     public int cantidadArcos() {
-        return this.vertices.stream()
-                .map(x -> x.getArcosSize())
-                .reduce((x, y) -> x + y)
-                .orElse(0);
+        return this.cantidadArcos;
     }
 
     /**

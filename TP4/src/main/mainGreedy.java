@@ -12,7 +12,7 @@ public class mainGreedy {
         Greedy greedy = new Greedy();
         EmpleadosUtils empleadosUtils = new EmpleadosUtils();
         ArrayList<Empleado> empleados = empleadosUtils.cargarEmpleados();
-        System.out.println(greedy.resolveGreedy(empleados,0));
+        System.out.println(greedy.resolveGreedy(empleados));
 
     }
 }

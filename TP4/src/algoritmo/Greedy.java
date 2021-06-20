@@ -24,11 +24,13 @@ public class Greedy {
             }
             contadorGreedy++;
         }
-        resultado.add(empleados);
+        resultado.add(empleadosGrupo1);
+        resultado.add(findGrupo2(empleados, empleadosGrupo1));
+
         return resultado;
     }
 
-    private Integer getFuerzaTrabajo(List<Empleado> empleados) {
+    public Integer getFuerzaTrabajo(List<Empleado> empleados) {
         AtomicReference<Integer> suma = new AtomicReference<>(0);
         empleados.forEach(empleado -> {
             suma.updateAndGet(v -> v + empleado.getFuerzaDeTrabajo());

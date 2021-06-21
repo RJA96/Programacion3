@@ -35,9 +35,34 @@ public class mainGreedy {
     empleadosUtils.printResult(resolveGreedy);
 
     System.out.println("Entry 5");
-    entry = empleadosUtils.getEntry4();
+    entry = empleadosUtils.getEntry5();
+    System.out.println("Total workforce: " + empleadosUtils.getWorkForce(entry));
+    resolveGreedy = greedy.resolveGreedy(entry);
+    empleadosUtils.printResult(resolveGreedy);
+
+    System.out.println("Entry 6");
+    entry = empleadosUtils.getEntry6();
+    System.out.println("Total workforce: " + empleadosUtils.getWorkForce(entry));
+    resolveGreedy = greedy.resolveGreedy(entry);
+    empleadosUtils.printResult(resolveGreedy);
+
+    System.out.println("Entry 7");
+    entry = empleadosUtils.getEntry7();
+    System.out.println("Total workforce: " + empleadosUtils.getWorkForce(entry));
+    resolveGreedy = greedy.resolveGreedy(entry);
+    empleadosUtils.printResult(resolveGreedy);
+
+    System.out.println("Entry 8");
+    entry = empleadosUtils.getEntry8();
+    System.out.println("Total workforce: " + empleadosUtils.getWorkForce(entry));
+    resolveGreedy = greedy.resolveGreedy(entry);
+    empleadosUtils.printResult(resolveGreedy);
+
+    System.out.println("Entry 9");
+    entry = empleadosUtils.getEntry9();
     System.out.println("Total workforce: " + empleadosUtils.getWorkForce(entry));
     resolveGreedy = greedy.resolveGreedy(entry);
     empleadosUtils.printResult(resolveGreedy);
   }
+
 }

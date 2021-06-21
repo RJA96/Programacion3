@@ -7,11 +7,12 @@ import java.util.ArrayList;
 
 public class Greedy {
 
-  private Integer contadorGreedy = 0;
+  private Integer greedyCounter = 0;
 
   private final EmpleadosUtils empleadosUtils = new EmpleadosUtils();
 
   public ArrayList<ArrayList<Employee>> resolveGreedy(ArrayList<Employee> employees) {
+    greedyCounter = 0;
     ArrayList<Employee> candidatos = new ArrayList<>(employees);
     ArrayList<ArrayList<Employee>> resultado = new ArrayList();
     ArrayList<Employee> empleadosGrupo1 = new ArrayList<>();
@@ -20,9 +21,10 @@ public class Greedy {
       Employee employeeSeleccionado = seleccionar(candidatos);
       candidatos.remove(employeeSeleccionado);
       if (esFactible(employeeSeleccionado, empleadosGrupo1, employees)) {
+
         empleadosGrupo1.add(employeeSeleccionado);
       }
-      contadorGreedy++;
+
     }
     resultado.add(empleadosGrupo1);
     resultado.add(findGrupo2(employees, empleadosGrupo1));
@@ -37,6 +39,7 @@ public class Greedy {
   }
 
   private boolean esFactible(Employee e, ArrayList<Employee> G1, ArrayList<Employee> candidatos) {
+    greedyCounter++;
     candidatos.removeAll(G1);
     Integer fuerzaTrabajoRestante = empleadosUtils.getWorkForce(candidatos);
     if (diferenciaFuerzaDeTrabajo(
@@ -62,11 +65,11 @@ public class Greedy {
     return empleadosTotales;
   }
 
-  public Integer getContadorGreedy() {
-    return contadorGreedy;
+  public Integer getGreedyCounter() {
+    return greedyCounter;
   }
 
-  public void setContadorGreedy(Integer contadorGreedy) {
-    this.contadorGreedy = contadorGreedy;
+  public void setGreedyCounter(Integer greedyCounter) {
+    this.greedyCounter = greedyCounter;
   }
 }

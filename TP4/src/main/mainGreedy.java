@@ -1,25 +1,43 @@
 package main;
 
-import algoritmo.Greedy;
-import entidad.Empleado;
+import algorithms.Greedy;
+import entities.Employee;
 import utils.EmpleadosUtils;
 
 import java.util.ArrayList;
 
 public class mainGreedy {
-    public static void main(String[] args) {
-        Greedy greedy = new Greedy();
-        EmpleadosUtils empleadosUtils = new EmpleadosUtils();
-        ArrayList<Empleado> empleados = empleadosUtils.cargarEmpleados();
-        System.out.println(greedy.getFuerzaTrabajo(empleados));
-        ArrayList<ArrayList<Empleado>> resolve = greedy.resolveGreedy(empleados);
+  public static void main(String[] args) {
+    Greedy greedy = new Greedy();
+    EmpleadosUtils empleadosUtils = new EmpleadosUtils();
+    System.out.println("Entry 1");
+    ArrayList<Employee> entry = empleadosUtils.getEntry1();
+    System.out.println("Total workforce: " + empleadosUtils.getWorkForce(entry));
+    ArrayList<ArrayList<Employee>> resolveGreedy = greedy.resolveGreedy(entry);
+    empleadosUtils.printResult(resolveGreedy);
 
-        resolve.forEach(grupo -> {
-            System.out.println("GRUPO N");
-            System.out.println(greedy.getFuerzaTrabajo(grupo));
-            System.out.println(grupo);
-        });
-        System.out.println();
+    System.out.println("Entry 2");
+    entry = empleadosUtils.getEntry2();
+    System.out.println("Total workforce: " + empleadosUtils.getWorkForce(entry));
+    resolveGreedy = greedy.resolveGreedy(entry);
+    empleadosUtils.printResult(resolveGreedy);
 
-    }
+    System.out.println("Entry 3");
+    entry = empleadosUtils.getEntry3();
+    System.out.println("Total workforce: " + empleadosUtils.getWorkForce(entry));
+    resolveGreedy = greedy.resolveGreedy(entry);
+    empleadosUtils.printResult(resolveGreedy);
+
+    System.out.println("Entry 4");
+    entry = empleadosUtils.getEntry4();
+    System.out.println("Total workforce: " + empleadosUtils.getWorkForce(entry));
+    resolveGreedy = greedy.resolveGreedy(entry);
+    empleadosUtils.printResult(resolveGreedy);
+
+    System.out.println("Entry 5");
+    entry = empleadosUtils.getEntry4();
+    System.out.println("Total workforce: " + empleadosUtils.getWorkForce(entry));
+    resolveGreedy = greedy.resolveGreedy(entry);
+    empleadosUtils.printResult(resolveGreedy);
+  }
 }

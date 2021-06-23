@@ -5,6 +5,7 @@ import entities.Employee;
 import utils.EmpleadosUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class mainGreedy {
   public static void main(String[] args) {
@@ -15,6 +16,7 @@ public class mainGreedy {
     System.out.println("Total workforce: " + empleadosUtils.getWorkForce(entry));
     ArrayList<ArrayList<Employee>> resolveGreedy = greedy.resolveGreedy(entry);
     System.out.println("counterGreedyCandidates: " + greedy.getGreedyCounter());
+    System.out.println();
     empleadosUtils.printResult(resolveGreedy);
 
     System.out.println("Entry 2");
@@ -22,6 +24,7 @@ public class mainGreedy {
     System.out.println("Total workforce: " + empleadosUtils.getWorkForce(entry));
     resolveGreedy = greedy.resolveGreedy(entry);
     System.out.println("counterGreedyCandidates: " + greedy.getGreedyCounter());
+    System.out.println();
     empleadosUtils.printResult(resolveGreedy);
 
     System.out.println("Entry 3");
@@ -29,6 +32,7 @@ public class mainGreedy {
     System.out.println("Total workforce: " + empleadosUtils.getWorkForce(entry));
     resolveGreedy = greedy.resolveGreedy(entry);
     System.out.println("counterGreedyCandidates: " + greedy.getGreedyCounter());
+    System.out.println();
     empleadosUtils.printResult(resolveGreedy);
 
     System.out.println("Entry 4");
@@ -36,12 +40,14 @@ public class mainGreedy {
     System.out.println("Total workforce: " + empleadosUtils.getWorkForce(entry));
     resolveGreedy = greedy.resolveGreedy(entry);
     System.out.println("counterGreedyCandidates: " + greedy.getGreedyCounter());
+    System.out.println();
     empleadosUtils.printResult(resolveGreedy);
 
     System.out.println("Entry 5");
     entry = empleadosUtils.getEntry5();
     System.out.println("Total workforce: " + empleadosUtils.getWorkForce(entry));
     resolveGreedy = greedy.resolveGreedy(entry);
+    System.out.println();
     empleadosUtils.printResult(resolveGreedy);
 
     System.out.println("Entry 6");
@@ -49,6 +55,7 @@ public class mainGreedy {
     System.out.println("Total workforce: " + empleadosUtils.getWorkForce(entry));
     resolveGreedy = greedy.resolveGreedy(entry);
     System.out.println("counterGreedyCandidates: " + greedy.getGreedyCounter());
+    System.out.println();
     empleadosUtils.printResult(resolveGreedy);
 
     System.out.println("Entry 7");
@@ -56,6 +63,7 @@ public class mainGreedy {
     System.out.println("Total workforce: " + empleadosUtils.getWorkForce(entry));
     resolveGreedy = greedy.resolveGreedy(entry);
     System.out.println("counterGreedyCandidates: " + greedy.getGreedyCounter());
+    System.out.println();
     empleadosUtils.printResult(resolveGreedy);
 
     System.out.println("Entry 8");
@@ -63,6 +71,7 @@ public class mainGreedy {
     System.out.println("Total workforce: " + empleadosUtils.getWorkForce(entry));
     resolveGreedy = greedy.resolveGreedy(entry);
     System.out.println("counterGreedyCandidates: " + greedy.getGreedyCounter());
+    System.out.println();
     empleadosUtils.printResult(resolveGreedy);
 
     System.out.println("Entry 9");
@@ -70,6 +79,7 @@ public class mainGreedy {
     System.out.println("Total workforce: " + empleadosUtils.getWorkForce(entry));
     resolveGreedy = greedy.resolveGreedy(entry);
     System.out.println("counterGreedyCandidates: " + greedy.getGreedyCounter());
+    System.out.println();
     empleadosUtils.printResult(resolveGreedy);
   }
 

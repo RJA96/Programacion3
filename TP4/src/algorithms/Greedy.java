@@ -18,6 +18,7 @@ public class Greedy {
     ArrayList<Employee> empleadosGrupo1 = new ArrayList<>();
     candidatos.sort(Employee::compareTo);
     while (!candidatos.isEmpty()) {
+      greedyCounter++;
       Employee employeeSeleccionado = seleccionar(candidatos);
       candidatos.remove(employeeSeleccionado);
       if (esFactible(employeeSeleccionado, empleadosGrupo1, employees)) {
@@ -39,7 +40,7 @@ public class Greedy {
   }
 
   private boolean esFactible(Employee e, ArrayList<Employee> G1, ArrayList<Employee> candidatos) {
-    greedyCounter++;
+
     candidatos.removeAll(G1);
     Integer fuerzaTrabajoRestante = empleadosUtils.getWorkForce(candidatos);
     if (diferenciaFuerzaDeTrabajo(

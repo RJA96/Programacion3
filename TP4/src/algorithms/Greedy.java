@@ -1,21 +1,22 @@
 package algorithms;
 
 import entities.Employee;
-import utils.EmpleadosUtils;
+import utils.EmployeesUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Greedy {
 
   private Integer greedyCounter = 0;
 
-  private final EmpleadosUtils empleadosUtils = new EmpleadosUtils();
+  private final EmployeesUtils employeesUtils = new EmployeesUtils();
 
-  public ArrayList<ArrayList<Employee>> resolveGreedy(ArrayList<Employee> employees) {
+  public List<List<Employee>> resolveGreedy(List<Employee> employees) {
     greedyCounter = 0;
-    ArrayList<Employee> candidatos = new ArrayList<>(employees);
-    ArrayList<ArrayList<Employee>> resultado = new ArrayList();
-    ArrayList<Employee> empleadosGrupo1 = new ArrayList<>();
+    List<Employee> candidatos = new ArrayList<>(employees);
+    List<List<Employee>> resultado = new ArrayList();
+    List<Employee> empleadosGrupo1 = new ArrayList<>();
     candidatos.sort(Employee::compareTo);
     while (!candidatos.isEmpty()) {
       greedyCounter++;
@@ -33,19 +34,19 @@ public class Greedy {
     return resultado;
   }
 
-  private Employee seleccionar(ArrayList<Employee> employees) {
+  private Employee seleccionar(List<Employee> employees) {
     if (!employees.isEmpty()) {
       return employees.get(0);
     } else return null;
   }
 
-  private boolean esFactible(Employee e, ArrayList<Employee> G1, ArrayList<Employee> candidatos) {
+  private boolean esFactible(Employee e, List<Employee> G1, List<Employee> candidatos) {
 
     candidatos.removeAll(G1);
-    Integer fuerzaTrabajoRestante = empleadosUtils.getWorkForce(candidatos);
+    Integer fuerzaTrabajoRestante = employeesUtils.getWorkForce(candidatos);
     if (diferenciaFuerzaDeTrabajo(
-            empleadosUtils.getWorkForce(G1) + e.getWorkForce(), fuerzaTrabajoRestante)
-        < diferenciaFuerzaDeTrabajo(empleadosUtils.getWorkForce(G1), fuerzaTrabajoRestante)) {
+            employeesUtils.getWorkForce(G1) + e.getWorkForce(), fuerzaTrabajoRestante)
+        < diferenciaFuerzaDeTrabajo(employeesUtils.getWorkForce(G1), fuerzaTrabajoRestante)) {
         return true;
     } else {
       return false;
@@ -60,8 +61,8 @@ public class Greedy {
     }
   }
 
-  private ArrayList<Employee> findGrupo2(
-      ArrayList<Employee> empleadosTotales, ArrayList<Employee> empleadosGrupo) {
+  private List<Employee> findGrupo2(
+      List<Employee> empleadosTotales, List<Employee> empleadosGrupo) {
     empleadosTotales.removeAll(empleadosGrupo);
     return empleadosTotales;
   }

@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class EmpleadosUtils {
-  public ArrayList<Employee> getTotalEmployees() {
-    ArrayList<Employee> employees = new ArrayList<>();
+public class EmployeesUtils {
+  public List<Employee> getTotalEmployees() {
+    List<Employee> employees = new ArrayList<>();
     employees.add(new Employee("e1", "Juan", "Perez", 32, 48));
     employees.add(new Employee("e2", "Roberto", "Hernández", 45, 57));
     employees.add(new Employee("e3", "Camila", "Gutiérrez", 33, 51));
@@ -32,8 +32,8 @@ public class EmpleadosUtils {
     return employees;
   }
 
-  public ArrayList<Employee> getEntry1() {
-    ArrayList<Employee> employees = new ArrayList<>();
+  public List<Employee> getEntry1() {
+    List<Employee> employees = new ArrayList<>();
     employees.add(new Employee("e1", "Juan", "Perez", 32, 48));
     employees.add(new Employee("e2", "Roberto", "Hernández", 45, 57));
     employees.add(new Employee("e3", "Camila", "Gutiérrez", 33, 51));
@@ -114,14 +114,14 @@ public class EmpleadosUtils {
     employees.add(new Employee("e16", "Francesca", "Figueroa", 43, 21));
     return employees;
   }
-  public ArrayList<Employee> getEntry9() {
+  public List<Employee> getEntry9() {
     return this.getTotalEmployees();
   }
   public Integer getWorkForce(List<Employee> employees) {
     AtomicReference<Integer> total = new AtomicReference<>(0);
     employees.forEach(
-        empleado -> {
-          total.updateAndGet(v -> v + empleado.getWorkForce());
+        employee -> {
+          total.updateAndGet(v -> v + employee.getWorkForce());
         });
     return total.get();
   }
@@ -131,9 +131,9 @@ public class EmpleadosUtils {
     System.out.println();
   }
 
-  public void printResult(ArrayList<ArrayList<Employee>> grupos) {
+  public void printResult(List<List<Employee>> groups) {
     AtomicReference<Integer> contador = new AtomicReference<>(1);
-    grupos.forEach(
+    groups.forEach(
         grupo -> {
           System.out.println("Group: " + contador);
           System.out.println("Group workforce: " + getWorkForce(grupo));

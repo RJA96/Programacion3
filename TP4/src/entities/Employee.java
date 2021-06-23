@@ -1,6 +1,7 @@
 package entities;
 
 public class Employee implements Comparable<Employee> {
+
   String id;
   String name;
   String lastName;
@@ -17,21 +18,13 @@ public class Employee implements Comparable<Employee> {
 
   @Override
   public String toString() {
-    return "Empleado{"
-        + "id='"
-        + id
-        + '\''
-        + ", nombre='"
-        + name
-        + '\''
-        + ", apellido='"
-        + lastName
-        + '\''
-        + ", edad="
-        + age
-        + ", fuerzaDeTrabajo="
-        + workForce
-        + '}';
+    return "Employee{" +
+        "id='" + id + '\'' +
+        ", name='" + name + '\'' +
+        ", lastName='" + lastName + '\'' +
+        ", age=" + age +
+        ", workForce=" + workForce +
+        '}';
   }
 
   public String getId() {

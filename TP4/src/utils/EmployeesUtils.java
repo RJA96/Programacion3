@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class EmployeesUtils {
+
   public List<Employee> getTotalEmployees() {
     List<Employee> employees = new ArrayList<>();
     employees.add(new Employee("e1", "Juan", "Perez", 32, 48));
@@ -90,6 +91,7 @@ public class EmployeesUtils {
     employees.add(new Employee("e10", "Valentino", "González", 58, 22));
     return employees;
   }
+
   public ArrayList<Employee> getEntry7() {
     ArrayList<Employee> employees = new ArrayList<>();
     employees.add(new Employee("e17", "Santino", "Blanco", 25, 79));
@@ -114,19 +116,19 @@ public class EmployeesUtils {
     employees.add(new Employee("e16", "Francesca", "Figueroa", 43, 21));
     return employees;
   }
+
   public List<Employee> getEntry9() {
     return this.getTotalEmployees();
   }
+
   public Integer getWorkForce(List<Employee> employees) {
     AtomicReference<Integer> total = new AtomicReference<>(0);
     employees.forEach(
-        employee -> {
-          total.updateAndGet(v -> v + employee.getWorkForce());
-        });
+        employee -> total.updateAndGet(v -> v + employee.getWorkForce()));
     return total.get();
   }
 
-  public void printEmploys(List<Employee> employees) {
+  private void printEmploys(List<Employee> employees) {
     employees.forEach(System.out::println);
     System.out.println();
   }

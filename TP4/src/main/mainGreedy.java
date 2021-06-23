@@ -7,6 +7,7 @@ import utils.EmployeesUtils;
 import java.util.List;
 
 public class mainGreedy {
+
   public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
   public static final String ANSI_RESET = "\u001B[0m";
 
